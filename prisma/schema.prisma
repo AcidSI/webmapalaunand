@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Tabel untuk mengelola Anggota MAPALA
+model Anggota {
+  id_anggota    Int       @id @default(autoincrement())
+  nia           String    @unique @db.VarChar(20)
+  nama_lengkap  String    @db.VarChar(100)
+  spesialisasi  String?   @db.VarChar(50)
+  status        String    @default("Aktif")
+}
+
+// Tabel untuk Landing Page DIKSAR
+model PendaftaranDiksar {
+  id_daftar      Int      @id @default(autoincrement())
+  nama_pendaftar String   @db.VarChar(100)
+  nim            String   @unique @db.VarChar(20)
+  status_seleksi String   @default("Pending")
+  tanggal_daftar DateTime @default(now())
+}
